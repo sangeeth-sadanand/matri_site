@@ -1,0 +1,177 @@
+{% extends "master.djhtml" %}
+
+{% block title %}
+    Soulmate-User payment
+{% endblock %}
+
+{% block navbar_left %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <h2 class="col-auto">Payment options</h2>
+        </div>
+        <hr>
+        <div class="row" >
+            <div class="col-md card rounded payment" style="background-image:linear-gradient(180deg, rgba(201,255,248,0.34), rgba(179,255,186,0.35));">
+                <table>
+                    <tr>
+                        <th colspan="2" style="border-bottom: 1px solid black; ">Free</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Upload Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Edit Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Search profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Interested Profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View Basic details of others</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View full details of others</th><td><i class="fa fa-times" style="color: red"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Send proposal</th><td><i class="fa fa-times" style="color: red"></i> </td>
+                    </tr>
+                </table>
+                 <a class="btn bg-main text-white" href="{% url 'register' %}">Register now</a>
+            </div>
+            <div class="col-md" >
+                <div class="col-md card rounded payment" style="background-image:linear-gradient(180deg, rgba(201,255,248,0.34), rgba(179,255,186,0.35));">
+                <table>
+                    <tr>
+                        <th colspan="2" style="border-bottom: 1px solid black; ">6 month pack</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Upload Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Edit Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Search profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Interested Profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View Basic details of others</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View full details of others</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Send proposal</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                </table>
+                    <a class="btn bg-main" href="{% url 'register' %}" style="border-bottom: 20px">Pay now</a>
+                </div>
+            </div>
+            <div class="col-md" >
+                <div class="col-md card rounded payment" style="background-image:linear-gradient(180deg, rgba(201,255,248,0.34), rgba(179,255,186,0.35));">
+                <table>
+                    <tr>
+                        <th colspan="2" style="border-bottom: 1px solid black; ">12 month pack</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Upload Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Edit Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Search profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Interested Profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View Basic details of others</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View full details of others</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Send proposal</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                </table>
+                    <a class="btn bg-main" href="{% url 'register' %}" style="border-bottom: 20px">Pay now</a>
+                </div>
+            </div>
+            <div class="col-md" >
+                <div class="col-md card rounded payment" style="background-image:linear-gradient(180deg, rgba(201,255,248,0.34), rgba(179,255,186,0.35));">
+                <table>
+                    <tr>
+                        <th colspan="2" style="border-bottom: 1px solid black; ">2 year pack</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Upload Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Edit Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Search profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Interested Profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View Basic details of others</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View full details of others</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Send proposal</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                </table>
+                    <a class="btn bg-main" href="{% url 'register' %}" style="border-bottom: 20px">Pay now</a>
+                </div>
+            </div>
+            <div class="col-md" >
+                <div class="col-md card rounded payment" style="background-image:linear-gradient(180deg, rgba(201,255,248,0.34), rgba(179,255,186,0.35));">
+                <table>
+                    <tr>
+                        <th colspan="2" style="border-bottom: 1px solid black; ">3 year pack</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Upload Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Edit Profile</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Search profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Interested Profiles</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View Basic details of others</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>View full details of others</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid gray; ">
+                        <th>Send proposal</th><td><i class="fa fa-check" style="color: green"></i> </td>
+                    </tr>
+                </table>
+                    <a class="btn bg-main" href="{% url 'register' %}" style="border-bottom: 20px">Pay now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "master.djhtml" %}
+
+{% block title %} 
+    Soulmate- User registration
+{% endblock %}
+
+
+{% block navbar_left %}
+
+{% endblock %}
+
+{% block navbar_right %}
+
+{% endblock %}
+
+{% block content %}
+   <div class="container" xmlns="http://www.w3.org/1999/html">
+      <!--================================ Title row ========================-->
+        <div class="row justify-content-center">
+                Notifications
+        </div>
+        <hr>
+    {% for x in n %}
+        <div class="card">
+            <div class="col-md">
+              <a href="{% url x.url %}">
+                  <div class="card-body">
+                    <h5 class="card-title"><b>{{ x.title }}</b></h5>
+                    <p class="card-text">{{ x.message }}</p>
+                    <p class="card-text"><small class="text-muted">{{x.date}}</small></p>
+                  </div>
+              </a>
+            </div>
+          </div>
+    {% endfor %}
+   </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

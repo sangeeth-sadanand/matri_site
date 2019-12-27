@@ -1,0 +1,79 @@
+{% extends "master.djhtml" %}
+
+{% block title %}
+    Soulmate Edit profile
+{% endblock %}
+
+{% block navbar_left %}
+
+{% endblock %}
+
+{% block content %}
+      <!--================================ Title row ========================-->
+                <div class="row justify-content-center">
+                    <div class="col-md-auto">
+                        <i class="fa fa-thumbs-up"></i> Interested profiles
+                    </div>
+                </div>
+                <hr>
+
+             <!-----------------------------Search result------------------------------>
+                 {% if p|length > 0 %}
+                 <div class=" row justify-content-around">
+                    {% for x in p %}
+                    <div class="card col-md-3" style="background: inherit; font-size: 1rem">
+                        <br />
+                        {% if x.photo != None %}
+                            <img class="res_img card-img-top img-fluid rounded" src="{{ x.photo.photo.url }}">
+                        {% else %}
+                            {% load static %}
+                              <img class="card-img-top img-fluid rounded" src="{% static 'images/blank.png' %}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{x.user.get_full_name}}</h5>
+                                <div class="row">
+                                    <div class="col"><b>Age: </b></div>
+                                    <div class="col">{{ x.age }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Religion: </b></div>
+                                    <div class="col">{{ x.religion }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Marital status: </b></div>
+                                    <div class="col">{{ x.marital_status_get }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Country: </b></div>
+                                    <div class="col">{{ x.country }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Education: </b></div>
+                                    <div class="col">{{ x.education_get }}<br> ({{ x.specialization }})</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Mother tongue: </b></div>
+                                    <div class="col">{{ x.mother_tongue }}</div>
+                                </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                 </div>
+                 <hr>
+                 {% else %}
+                     <h2>Sorry, no interested profiles to show. </h2>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block footer %}
+{% load static %}
+
+
+{% endblock %}

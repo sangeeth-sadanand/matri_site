@@ -1,0 +1,260 @@
+{% extends "master.djhtml" %}
+
+{% block title %} 
+    Soulmate My-profile
+{% endblock %}
+
+{% block navbar_left %}
+
+{% endblock %}
+
+{% block content %}
+<div class="modal fade " id="profile-modal" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <img id="profile-modal-image" class="w-100" src="" style="height: auto;width: 70vw">
+    </div>
+  </div>
+</div>
+    <div class="container" >
+        <h1 align="center">My Profile</h1><hr>
+        <div class="row " >
+        <!--========================== Profile Picture ===================-->
+            <div class = "col-md-4" >
+               {% if a.photo != None %}
+                  <a href="{% url 'profile_show' %}"><img class="img-fluid w-100" src="{{ a.photo.photo.url }}"><a>
+                {% else %}
+                    {% load static %}
+                      <img class="img-fluid w-100" src="{% static 'images/blank.png' %}">
+                {% endif %}
+            </div>
+        <!--===========================Name =============================-->
+            <div class="col-md-8">
+                <h2 style="text-transform: capitalize">{{ a.user.get_full_name }}</h2>
+                <table>
+                    <tr>
+                        <th>Age:</th><td>{{ a.age }}</td>
+                    </tr>
+                    <tr>
+                        <th>Religion:</th><td>{{ a.religion }}</td>
+                    </tr>
+                    <tr>
+                        <th>Marital status:</th><td>{{ a.marital_status_get }}</td>
+                    </tr>
+                    <tr>
+                        <th>Country:</th><td>{{ a.country }}</td>
+                    </tr>
+                    <tr>
+                        <th>Education:</th><td>{{ a.education_get }} ({{ a.specialization }})</td>
+                    </tr>
+
+                </table>
+                <div  class="profile-tips">
+                    {% if a.smoke == 'Y' %}
+                        <i class="fas fa-smoking" style="color: green"
+                           data-toggle="tooltip" title="Smoking status: Yes"></i>
+                    {% else %}
+                        <i class="fas fa-smoking-ban" style="color: red"
+                           data-toggle="tooltip" title="Smoking status: No"></i>
+                    {% endif %}
+                |
+                    {% if a.drinks == 'Y' %}
+                        <i class="fas fa-wine-glass" style="color: green"
+                           data-toggle="tooltip" title="drinking status: Yes"></i>
+                    {% else %}
+                        <i class="fas fa-wine-glass-alt" style="color: red"
+                           data-toggle="tooltip" title="Drinking status: No"></i>
+                    {% endif %}
+                |
+                    <span style="color: #c32143" data-toggle="tooltip" title="Age: {{ a.age }}" >{{ a.age }}</span>
+                |
+                    <span style="color: #c32143" data-toggle="tooltip" title= "Religion: {{ a.religion }} Caste: {{ a.caste }}({{ a.sub_caste}})">
+                        {{ a.religion }} </span>
+                |
+                <span style="color: #c32143" data-toggle="tooltip" title="Mother tongue:{{ a.mother_tongue }}" >{{ a.mother_tongue }}</span>
+                </div>
+            <hr>
+                {% if show_proposal %}
+                    <a class="btn bg-main text-white" href="{% url 'proposal_request'%}?proposed_id={{ a.pk }}">Send Proposal</a>
+                {% else %}
+                    <a href="/my-profile/i-req/?interested_id={{ a.pk }}" class ="btn bg-main text-white">Interested</a>
+                {% endif %}
+            </div>
+
+        </div>
+
+    <hr>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <a class="nav-link active" id="v-pills-about-me-tab" data-toggle="pill" href="#v-pills-about_me" role="tab" aria-controls="v-pills-about_me" aria-selected="true">About me</a>
+              <a class="nav-link" id="v-pills-basic-tab" data-toggle="pill" href="#v-pills-basic" role="tab" aria-controls="v-pills-basic" aria-selected="false">Basics & Lifestyle</a>
+              <a class="nav-link" id="v-pills-religion-tab" data-toggle="pill" href="#v-pills-religion" role="tab" aria-controls="v-pills-religion" aria-selected="false">Religion</a>
+              <a class="nav-link" id="v-pills-education-tab" data-toggle="pill" href="#v-pills-education" role="tab" aria-controls="v-pills-education" aria-selected="false">Education</a>
+              <a class="nav-link" id="v-pills-family-tab" data-toggle="pill" href="#v-pills-family" role="tab" aria-controls="v-pills-family" aria-selected="false">Family</a>
+              <a class="nav-link" id="v-pills-address-tab" data-toggle="pill" href="#v-pills-address" role="tab" aria-controls="v-pills-address" aria-selected="false">Address</a>
+              <a class="nav-link" id="v-pills-pp-tab" data-toggle="pill" href="#v-pills-pp" role="tab" aria-controls="v-pills-pp" aria-selected="false">Profile preference</a>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-about_me" role="tabpanel" aria-labelledby="v-pills-about-me-tab">
+                  <span class="text-justifed" >{{ a.about_me }}</span>
+              </div>
+              <div class="tab-pane fade" id="v-pills-basic" role="tabpanel" aria-labelledby="v-pills-basic-tab">
+                  <table>
+                      <tr>
+                        <th>Name:</th><td>{{ a.user.get_full_name }}</td>
+                      </tr>
+                      <tr>
+                        <th>Date of birth:</th><td>{{ a.date_of_birth }}</td>
+                      </tr>
+                      <tr>
+                        <th>Age:</th><td>{{ a.get_age }}</td>
+                      </tr>
+                      <tr>
+                        <th>Marital tongue:</th><td>{{ a.mother_tongue }}</td>
+                      </tr>
+                      <tr>
+                        <th>Diet:</th><td>{{ a.diet_get}}</td>
+                      </tr>
+                      <tr>
+                        <th>Body type:</th><td>{{ a.body_type_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Complexion:</th><td >{{ a.skin_color_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Weight:</th><td>{{ a.weight }}</td>
+                      </tr>
+                      <tr>
+                        <th>Height:</th><td>{{ a.height }}</td>
+                      </tr>
+                      <tr>
+                        <th>Blood group:</th><td>{{ a.blood_group_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Marital status:</th><td>{{ a.marital_status_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Smoke:</th><td>{{ a.smoke_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Drinks:</th><td>{{ a.drink_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Physical status:</th><td>{{ a.differently_able_get }}</td>
+                      </tr>
+                  </table>
+              </div>
+              <div class="tab-pane fade" id="v-pills-religion" role="tabpanel" aria-labelledby="v-pills-religion-tab">
+                  <table>
+                  <tr>
+                      <th>Religion:</th><td>{{ a.religion }}</td>
+                  </tr>
+                  <tr>
+                      <th>Caste:</th><td>{{ a.caste }}</td>
+                  </tr>
+                  <tr>
+                      <th>Sub-caste:</th><td>{{ a.sub_caste }}</td>
+                  </tr>
+                  </table>
+              </div>
+              <div class="tab-pane fade" id="v-pills-education" role="tabpanel" aria-labelledby="v-pills-education-tab">
+                  <table>
+                      <tr>
+                          <th>Highest education:</th><td>{{ a.education_get }}</td>
+                      </tr>
+                      <tr>
+                          <th>Specialization:</th><td>{{ a.specialization }}</td>
+                      </tr>
+                      <tr>
+                          <th>Occupation:</th><td>{{ a.occupation }}</td>
+                      </tr>
+                      <tr>
+                          <th>Annual income:</th><td>{{ a.annual_income }}</td>
+                      </tr>
+                  </table>
+              </div>
+             <div class="tab-pane fade" id="v-pills-family" role="tabpanel" aria-labelledby="v-pills-family-tab">
+                  <table>
+                  <tr>
+                      <th>Father's occupation:</th><td>{{ a.fathers_occupation }}</td>
+                  </tr>
+                  <tr>
+                      <th>Mother's occupation:</th><td>{{ a.mothers_occupation }}</td>
+                  </tr>
+                  <tr>
+                      <th>Number of sisters:</th><td>{{ a.no_sisters }}</td>
+                  </tr>
+                  <tr>
+                      <th>Number of brothers:</th><td>{{ a.no_brothers }}</td>
+                  </tr>
+                  </table>
+              </div>
+              <div class="tab-pane fade" id="v-pills-address" role="tabpanel" aria-labelledby="v-pills-address-tab">
+                  <table>
+                      {{ a.address }}<br>
+                      {{ a.state }}<br>
+                      {{ a.country }}
+                  </table>
+              </div>
+                <div class="tab-pane fade" id="v-pills-pp" role="tabpanel" aria-labelledby="v-pills-pp-tab">
+                  <table>
+                      <tr>
+                        <th>Age:</th><td>{{ p.age_from }} to {{ p.age_to }}</td>
+                      </tr>
+                      <tr>
+                        <th>Religion:</th><td>{{ p.religion }}</td>
+                      </tr>
+                      <tr>
+                        <th>Caste:</th><td>{{ p.caste }}</td>
+                      </tr>
+                      <tr>
+                        <th>Sub-caste:</th><td>{{ p.sub_caste }}</td>
+                      </tr>
+                      <tr>
+                        <th>Country:</th><td>{{ p.country }}</td>
+                      </tr>
+                      <tr>
+                        <th>State:</th><td>{{ p.state }}</td>
+                      </tr>
+                      <tr>
+                        <th>Education:</th><td>{{ p.education_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Specialization:</th><td>{{ p.specialization }}</td>
+                      </tr>
+                      <tr>
+                        <th>Occupation:</th><td>{{ p.occupation }}</td>
+                      </tr>
+                      <tr>
+                        <th>Diet:</th><td>{{ p.diet_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Body type:</th><td>{{ p.body_type_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Complexion:</th><td>{{ p.skin_color_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Height:</th><td>{{ p.height }}</td>
+                      </tr>
+                      <tr>
+                        <th>Marital status:</th><td>{{ p.marital_status_get }}</td>
+                      </tr>
+                      <tr>
+                        <th>Mother tongue:</th><td>{{ p.mother_tongue }}</td>
+                      </tr>
+                  </table>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

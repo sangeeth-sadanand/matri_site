@@ -1,0 +1,66 @@
+body{
+    background-color: #f1f1f1;
+    font-family: 'comic sans ms', cursive ;
+    font-size: 20px;
+}
+/* Background colors */
+.bg-main {
+    background-color: #c32143 !important;
+}
+.bg-silver{
+    background-color: #f1f1f1 !important;
+}
+.bg-violet{
+    background-color: #e9bdfa !important;
+}
+
+
+/* Fonts */
+.font-reg{
+    font-family: 'comic sans ms', cursive;
+}
+
+.font-sty{
+    font-family: 'Alex Brush', cursive;
+}
+
+.padding-tb{
+    padding: 2vw 0;
+}
+.padding-t-sm{
+    padding-top: 1vh;
+}
+a{
+    color: #a11a37
+}
+
+.btn:hover,.shadow{
+    box-shadow: 5px 5px 5px rgb(110, 110, 110);
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.res_img {
+    border-radius: 5%;
+    height: 45%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+.profile-tips{
+    font-size: medium;
+    padding-left:1%;
+    color: #7abaff;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    background-color: #c32143 !important;
+}
+.text-justifed{
+    text-align:justify;
+    text-justify:auto;
+}
+
+.payment{
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px rgb(110, 110, 110);
+    padding: 5px
+}

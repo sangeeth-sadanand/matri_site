@@ -1,0 +1,50 @@
+{% extends "master.djhtml" %}
+
+{% block title %}
+    Soulmate Edit profile
+{% endblock %}
+
+{% block navbar_left %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+      <!--================================ Title row ========================-->
+        <div class="row justify-content-center">
+                Proposal for me
+        </div>
+        <hr>
+             <!-----------------------------Search result------------------------------>
+        {% for x in p %}
+        <div class="card">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+                {% if x.proposal_to.photo != None %}
+                    <img class="card-img img-fluid rounded" src="{{ x.proposal_to.photo.photo.url }}">
+                {% else %}
+                    {% load static %}
+                      <img class="card-img img-fluid rounded" src="{% static 'images/blank.png' %}">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                  <h5 class="card-title"><b>Proposal from: </b>{{x.user_profile.user.get_full_name}}</h5>
+                  <p class="card-text"><b>Contact no.</b> {{ x.contact_number }}</p>
+                  <p class="card-text"><b>Whatsapp no.</b> {{ x.whatsapp_number }}</p>
+                  <p class="card-text">{{ x.message }}</p>
+                  <a class="btn bg-main text-white" href="{% url 'proposal_request'%}?proposed_id={{ x.user_profile.pk }}">Send Proposal</a>
+                  <p class="card-text"><small class="text-muted">{{x.requested_date}}</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% load static %}
+
+
+{% endblock %}

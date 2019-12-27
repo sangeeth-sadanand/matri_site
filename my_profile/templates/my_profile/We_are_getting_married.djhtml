@@ -1,0 +1,76 @@
+{% extends "master.djhtml" %}
+
+{% block title %}
+    Soulmate Edit profile
+{% endblock %}
+
+{% block navbar_left %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container" xmlns="http://www.w3.org/1999/html">
+        <h2 style="align-content: center"> We are getting married </h2>
+        <hr>
+        <form method= "POST" enctype="multipart/form-data">{% csrf_token %}
+        <div class ="col-md">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="name">Name of Would-be: </label>
+                </div>
+                <input class="form-control" type = "text" id = "name" name = "name" value = "{{m.would_be}}" required/>
+            </div>
+        </div>
+        <div class ="col-md">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="met-here">Met here?  </label>
+                </div>
+                <select class="custom-select" name = "met_here" id="met-here" required>
+                    <option value="True" selected>Yes</option>
+                    <option value="False"  >No</option>
+                </select>
+            </div>
+        </div>
+        <div class ="col-md">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="eng-date">Engagement date  </label>
+                </div>
+                <input class="form-control" type = "date" id = "eng-date" name = "eng_date" value = "{{m.engagement_date| date:"Y-m-d"}}" required/>
+            </div>
+        </div>
+        <div class ="col-md">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="eng-date">Marriage date  </label>
+                </div>
+                <input class="form-control" type = "date" id = "mar-date" name = "mar_date" value = "{{m.marriage_date| date:"Y-m-d"}}" required/>
+            </div>
+        </div>
+        <div class="input-group col-md mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Upload</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="photo"
+                   id="photo_browse" onchange="show_image_validate(this,'img_disp')">
+            <label class="custom-file-label"
+                   for="photo_browse">Browse: </label>
+          </div>
+        </div>
+        <div class="form-group row justify-content-around">
+                <input type="submit" id = "submit" class="btn btn-success col-sm-2" value = "Submit">
+                <a class="btn btn-danger col-sm-2" href= "{% url 'profile_show' %}">Cancel</a>
+        </div>
+
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+{% load static %}
+
+
+{% endblock %}

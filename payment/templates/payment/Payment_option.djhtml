@@ -1,0 +1,20 @@
+{% extends "master.djhtml" %}
+
+{% block title %}
+    Soulmate-User payment
+{% endblock %}
+
+{% block navbar_left %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        The Payment will be automatically done since it is a demonstration site.
+        The paid version expires on {{ p.expiry_date }}
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

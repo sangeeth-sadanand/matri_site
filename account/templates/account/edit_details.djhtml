@@ -1,0 +1,104 @@
+{% extends "master.djhtml" %}
+
+{% block title %} 
+    Soulmate- User registration
+{% endblock %}
+
+
+{% block navbar_left %}
+
+{% endblock %}
+
+{% block navbar_right %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container padding-tb">
+    <div class="row justify-content-around">
+            <form class="col" method = "POST"> {% csrf_token %}
+                <div class="row">
+
+                    <div class="col padding-tb">
+                        Edit detail
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="first_name" class = "col-sm-4">First name:</label>
+                    <input type="text" value = "{{ a.first_name }}" class="form-control col-sm-8" name="first_name" required>
+                </div>
+                <div class="form-group row">
+                        <label for="last_name" class = "col-sm-4">Last name:</label>
+                        <input type="text" value = "{{ a.last_name }}" class="form-control col-sm-8" name="last_name" required>
+                </div>
+                <div class="form-group row">
+                        <label for="email" class = "col-sm-4">Email:</label>
+                        <input type="email" value="{{ a.email }}" class="form-control col-sm-8" id="email" name="email" readonly>
+                </div>
+                <div class="form-group row">
+                        <label class = "col-sm-4"></label>
+                        <input type="submit" id = "option" name="option" class="btn btn-success col-sm-2" value = "Update">
+                </div>
+                <hr>
+                <div class="form-group row">
+                        <label for="re-password" class = "col-sm-4">Old password:</label>
+                        <input type="password" id= "old-password" class="form-control
+                        col-sm-8" name="old_password" required>
+                </div>
+                <div class="form-group row">
+                        <label for="password" class = "col-sm-4">Password:</label>
+                        <input type="password" id = "password" class="form-control
+                        col-sm-8" name="password"  onkeyup ="check_password()">
+                        <div class="invalid-feedback">
+                            Password does not match
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <label for="re-password" class = "col-sm-4">Retype password:</label>
+                        <input type="password" id= "re-password" class="form-control
+                        col-sm-8" name="re-password" onkeyup ="check_password()" >
+                </div>
+                <div class="form-group row">
+                        <label class = "col-sm-4"></label>
+                        <input type="submit" id = "submit" name="option" class="btn btn-success col-sm-2" value = "Change_password" disabled>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript">
+    var correct_password = false;
+    function check_password(){
+        var password = document.getElementById('password');
+        var re_password = document.getElementById('re-password');
+        //alert(password.value+','+re_password.value)
+        if (password.value != re_password.value & password.value != ""){
+            password.classList.remove("is-valid");
+            password.classList.add("is-invalid");
+            correct_password = false;
+            enable_Submit()
+        }
+        else{
+            password.classList.add("is-valid");
+            password.classList.remove("is-invalid");
+            correct_password = true;
+            enable_Submit()
+        }
+    }
+
+
+    function enable_Submit(){
+        if (correct_password ){
+            document.getElementById("submit").disabled = false
+        }
+        else
+        {
+            document.getElementById("submit").disabled = true
+        }
+    }
+</script>
+{% endblock %}

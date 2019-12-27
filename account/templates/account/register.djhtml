@@ -1,0 +1,144 @@
+{% extends "master.djhtml" %}
+
+{% block title %} 
+    Soulmate- User registration
+{% endblock %}
+
+
+{% block navbar_left %}
+
+{% endblock %}
+
+{% block navbar_right %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container padding-tb">
+    <div class="row justify-content-around">
+            <form class="col" method = "POST"> {% csrf_token %}
+                <div class="row">
+
+                    <div class="col padding-tb">
+                        Registration form
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="first_name" class = "col-sm-4">First name:</label>
+                    <input type="text" class="form-control col-sm-8" name="first_name" required>
+                </div>
+                <div class="form-group row">
+                        <label for="last_name" class = "col-sm-4">Last name:</label>
+                        <input type="text" class="form-control col-sm-8" name="last_name" required>
+                </div>
+                <div class="form-group row">
+                        <label for="email" class = "col-sm-4">Email:</label>
+                        <input type="email" class="form-control col-sm-8" id="email" name="email" onblur="check_email()">
+                        <div class="invalid-feedback">
+                            Email already exist. Please use different email id
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <label for="password" class = "col-sm-4">Password:</label>
+                        <input type="password" id = "password" class="form-control
+                        col-sm-8" name="password"  onkeyup ="check_password()" required>
+                        <div class="invalid-feedback">
+                            Password does not match
+                        </div>
+                </div>
+                <div class="form-group row">
+                        <label for="re-password" class = "col-sm-4">Retype password:</label>
+                        <input type="password" id= "re-password" class="form-control
+                        col-sm-8" name="re-password" onkeyup ="check_password()" >
+                </div>
+                <div class="form-group row">
+                        <label class = "col-sm-4"></label>
+                        <input type="submit" id = "submit" class="btn btn-success col-sm-2" value = "Submit" disabled>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript">
+    var correct_password = false;
+    var correct_username = false;
+    function check_password(){
+        var password = document.getElementById('password');
+        var re_password = document.getElementById('re-password');
+        //alert(password.value+','+re_password.value)
+        if (password.value != re_password.value & password.value != ""){
+            password.classList.remove("is-valid");
+            password.classList.add("is-invalid");
+            correct_password = false;
+            enable_Submit()
+        }
+        else{
+            password.classList.add("is-valid");
+            password.classList.remove("is-invalid");
+            correct_password = true;
+            enable_Submit()
+        }
+    }
+
+    function check_email(){
+        var username = document.getElementById("email");
+        var xmlHttp;
+        try
+        {    // Firefox, Opera 8.0+, Safari    
+            xmlHttp=new XMLHttpRequest();    
+        }
+        catch (e)
+        {    // Internet Explorer    
+            try
+            {      
+                xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");   
+            }
+            catch (e)
+            {      
+                try
+                {        
+                    xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");        
+                }
+                catch (e)
+                {        
+                    alert("Your browser does not support AJAX!");        
+                    return false;        
+                }      
+            }    
+        }
+        xmlHttp.onreadystatechange=function()
+        {
+            if(xmlHttp.readyState==4){
+                var response = xmlHttp.responseText.trim();
+                if (response == "true"){
+                    username.classList.add('is-valid');
+                    username.classList.remove('is-invalid')
+                    correct_username = true
+                    enable_Submit()
+                }
+                else{
+                    username.classList.add('is-invalid');
+                    username.classList.remove('is-valid')
+                    correct_username = false
+                    enable_Submit()
+                }
+            }
+      }
+    xmlHttp.open("GET",'/accounts/ajax/email_availability?email='+username.value ,true);
+    xmlHttp.send(null); 
+    }
+    function enable_Submit(){
+        if (correct_password & correct_username){
+            document.getElementById("submit").disabled = false
+        }
+        else
+        {
+            document.getElementById("submit").disabled = true
+        }
+    }
+</script>
+{% endblock %}

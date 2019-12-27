@@ -1,0 +1,255 @@
+{% extends "master.djhtml" %}
+
+{% block title %} 
+    Soulmate - Edit preference
+{% endblock %}
+
+{% block navbar_left %}
+
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="container padding-tb">
+        <div class="row justify-content-between">
+             <form class="col" method = "POST"> {% csrf_token %}
+                <div class="row">
+                <!--================================ Title row ========================-->
+                    <div class="col padding-tb">
+                        Edit partner preference
+                    </div>
+                </div>
+                <!--=================== age from_ to ========================-->
+                <div class="row ">
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="age">Age From : </label>
+                            </div>
+                            <input class="form-control" type = "text" id = "age" name = "age_from" value = "{{p.age_from}}" />
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="age">to: </label>
+                            </div>
+                            <input class="form-control" type = "text" id = "age" name = "age_to" value = "{{p.age_to}}" />
+                        </div>
+                    </div>
+                </div>
+                <!--=================== Religion  |  caste  |  sub-caste ========================-->
+                <div class="row justify-content-between">             
+                    <div class ="col-md-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="religion">Religion: </label>
+                            </div>
+                            <input class="form-control" list="religion_list" type = "text" id = "religion" name = "religion" value = "{{p.religion}}" />
+                            <datalist id=religion_list>
+                                <option value="Hinduism">
+                                <option value="Christianity">
+                                <option value="Islam">
+                                <option value="Buddhism">
+                                <option value="Sikhism">
+                                <option value="Jainism">
+                                <option value="Zoroastrian">
+                              </datalist>
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="caste">Caste: </label>
+                            </div>
+                            <input class="form-control" type = "text" id = "caste" name = "caste" value = "{{p.caste}}"/>
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="sub-caste">Sub-caste: </label>
+                            </div>
+                            <input class="form-control" type = "text" id = "sub-caste" name = "sub_caste" value = "{{p.sub_caste}}" />
+                        </div>
+                    </div>
+                </div>
+                 <!--===================state  |  country ========================-->
+                 <div class="row justify-content-between">
+                    <div class ="col-md-5">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" list = state_list for="state">Country: </label>
+                            </div>
+                            <select class="form-control" id="country" name="country"  onchange="populateStates('country', 'state','N/A' )"></select>
+                        </div>
+                    </div>
+                    <div class ="col-md-5">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="state">State: </label>
+                            </div>
+                            <select class="form-control" name="state" id="state"></select>
+                        </div>
+                    </div>
+                </div>
+                <!--=================== Education  |  specialization  |  occupation ========================-->
+                <div class="row justify-content-between">             
+                    <div class ="col-md-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="education">Education: </label>
+                            </div>
+                            <select class="custom-select" name = "education" id="education" required>
+                                {% for x, y in p.EDUCATION_CHOICES.items %}
+                                    <option value="{{x}}" {% if x == p.education %} selected {% endif %}>{{y}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="specialization">Specialization: </label>
+                            </div>
+                            <input class="form-control" type = "text" id = "specialization" name = "specialization" value = "{{p.specialization}}" required/>
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="occupation">Occupation: </label>
+                            </div>
+                            <input class="form-control" type = "text" id = "occupation" name = "occupation" value = "{{p.occupation}}" />
+                        </div>
+                    </div>
+                </div>
+                <!--=================== diet  |  body_type  |  skin color ========================-->
+                <div class="row justify-content-between">             
+                    <div class ="col-md-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="diet">diet: </label>
+                            </div>
+                            <select class="custom-select" name = "diet" id="diet" required>
+                                {% for x, y in p.DIET_CHOICES.items %}
+                                    <option value="{{x}}" {% if x == p.diet %} selected {% endif %}>{{y}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="body_type">Body type: </label>
+                            </div>
+                            <select class="custom-select" name = "body_type" id="body_type" required>
+                                {% for x, y in p.BODY_TYPE_CHOICES.items %}
+                                    <option value="{{x}}" {% if x == p.body_type %} selected {% endif %}>{{y}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="skin_color">skin_color: </label>
+                            </div>
+                            <select class="custom-select" name = "skin_color" id="skin_color" required>
+                                {% for x, y in p.SKIN_COLOR_CHOICES.items %}
+                                    <option value="{{x}}" {% if x == p.skin_color %} selected {% endif %} style = "color: rgb(4, 0, 255); background-color: {{y.1}} ;" >{{y.0}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--===================  height ========================-->
+                <div class="row justify-content-between">
+                    <div class ="col-md-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="height">Height: </label>
+                            </div>
+                            <input class="form-control" type = "number" name = "height" id="height" value = "{{p.height}}" min = 0 required>
+                            <div class="input-group-append">
+                                <span class="input-group-text">cms</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="marital_status">Marital status: </label>
+                            </div>
+                            <select class="custom-select" name = "marital_status" id="marital_status" required>
+                                {% for x, y in p.MARITAL_STATUS_CHOICES.items %}
+                                    <option value="{{x}}" {% if x == p.marital_status %} selected {% endif %}>{{y}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="weight">Mother tongue: </label>
+                            </div>
+                            <input class="form-control" list ="mother_tongue_list"  type = "text" name = "mother_tongue" id="mother_tongue" value = "{{p.mother_tongue}}" required>
+                            <datalist id=mother_tongue_list>
+                                <option value="Hindi">
+                                <option value="Bengali">
+                                <option value="Marathi">
+                                <option value="Telugu">
+                                <option value="Tamil">
+                                <option value="Gujarati">
+                                <option value="Urdu">
+                                <option value="Kannada">
+                                <option value="odia">
+                                <option value="Punjabi">
+                                <option value="Malayalam">
+                                <option value="Assamese">
+                                <option value="Maithili">
+                              </datalist>
+                        </div>
+                </div>
+                </div>
+                <div class="row justify-content-between">
+                    <div class ="col-md-12">
+                        <label>About my partner:</label>
+                            <textarea class="form-control" name = "about" rows = 4
+                              placeholder="About me"  onkeyup="show_remaining(this, 'abt_me_rem')"
+                              maxlength="500">{{p.about_my_partner}}</textarea>
+                    </div>
+            </div>
+             <div class="row justify-content-end">
+                    <div class ="col-md-1">
+                        <small id="abt_me_rem">--/500</small>
+                    </div>
+            </div>
+                <!--=================== submit ========================-->
+                <div class="form-group row justify-content-center">
+                        <input type="submit" id = "submit" class="btn btn-success col-sm-2" value = "Submit">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+<script> 
+function set_age(){
+    var age = document.getElementById('age');
+    age.readonly = false;
+    age.value = get_age(document.getElementById('dob').value);
+    age.readonly =true;
+}
+window.onload = function(){populateCountries('country', 'state','{{p.country}}');
+populateStates('country', 'state','{{p.state}}' )
+}
+</script>
+{% load static %}
+<script src="{% static 'js/countries.js' %}"></script>
+{% endblock %}

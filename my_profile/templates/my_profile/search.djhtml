@@ -1,0 +1,205 @@
+{% extends "master.djhtml" %}
+
+{% block title %}
+    Soulmate Edit profile
+{% endblock %}
+
+{% block navbar_left %}
+
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="padding-tb">
+        <div class="row justify-content-around">
+             <form class="col-lg-12" method = "POST"> {% csrf_token %}
+                <!--================================ Title row ========================-->
+                <div class="row justify-content-around">
+                    <div class-lg-10>
+                    <div class="col">
+                        <i class="fa fa-search"></i> Search
+                    </div>
+                <hr>
+                 <input type="hidden" name = 'gender' value={{a.gender}}>
+
+                <!---------------------------------- Marital ---------------------------->
+                 <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="marital_status">Marital status: </label>
+                    </div>
+                    <select class="custom-select" name = "marital_status" id="marital_status" required>
+                        <option value="S" selected>Single</option>
+                        <option value="M"  >Married</option>
+                    </select>
+
+                 </div>
+                <!--------------------------------- Country | State -------------------------------->
+                <div class="row justify-content-between">
+                    <div class ="col-md-5">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" list = state_list for="state">Country: </label>
+                            </div>
+                            <select class="form-control" id="country" name="country"  onchange="populateStates('country', 'state','N/A' )"></select>
+                        </div>
+                    </div>
+                    <div class ="col-md-5">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="state">State: </label>
+                            </div>
+                            <select class="form-control" name="state" id="state"></select>
+                        </div>
+                    </div>
+                </div>
+                <!--------------- Religion | Caste | Sub-caste --------->
+                <div class="row justify-content-between">
+                    <div class ="col-md-3">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="religion">Religion: </label>
+                            </div>
+                            <input class="form-control" list="religion_list" type = "text" id = "religion" name = "religion" value = "{{a.religion}}" />
+                            <datalist id=religion_list>
+                                <option value="Hinduism">
+                                <option value="Christianity">
+                                <option value="Islam">
+                                <option value="Buddhism">
+                                <option value="Sikhism">
+                                <option value="Jainism">
+                                <option value="Zoroastrian">
+                              </datalist>
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="caste">Caste: </label>
+                            </div>
+                            <input class="form-control" type = "text" id = "caste" name = "caste" value = "{{a.caste}}" />
+                        </div>
+                    </div>
+                    <div class ="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="sub-caste">Sub-caste: </label>
+                            </div>
+                            <input class="form-control" type = "text" id = "sub-caste" name = "sub_caste" value = "{{a.sub_caste}}" />
+                        </div>
+                    </div>
+                </div>
+                <!---------------------Mother tongue----------------->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="weight">Mother tongue: </label>
+                    </div>
+                    <input class="form-control" list ="mother_tongue_list"  type = "text" name = "mother_tongue" id="mother_tongue" value = "{{a.mother_tongue}}" >
+                    <datalist id=mother_tongue_list>
+                        <option value="Hindi">
+                        <option value="Bengali">
+                        <option value="Marathi">
+                        <option value="Telugu">
+                        <option value="Tamil">
+                        <option value="Gujarati">
+                        <option value="Urdu">
+                        <option value="Kannada">
+                        <option value="odia">
+                        <option value="Punjabi">
+                        <option value="Malayalam">
+                        <option value="Assamese">
+                        <option value="Maithili">
+                      </datalist>
+                </div>
+                <!---------------------age-to | age-from---------------------->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="weight">Age: </label>
+                    </div>
+                    <input class="form-control" type = "number" name = "from"  value ="{{from}}" min="0" max="100"> to
+                    <input class="form-control" type = "number" name = "to"  value ="{{to}}" min="0" max="100">
+                </div>
+                <!--=================== submit ========================-->
+                <div class="form-group row justify-content-center">
+                    <button class="btn bg-main text-white" type="submit" name="page_index" value="0">Submit</button>
+                </div>
+                </div>
+                </div>
+                 <hr>
+             <!-----------------------------Search result------------------------------>
+                 {% if p|length > 0 %}
+                 <div class=" row justify-content-around">
+                    {% for x in p %}
+                    <div class="card col-md-3" style="background: inherit; font-size: 1rem">
+                        <br />
+                        {% if x.photo != None %}
+                            <img class="res_img card-img-top img-fluid rounded" src="{{ x.photo.photo.url }}">
+                        {% else %}
+                            {% load static %}
+                              <img class="card-img-top img-fluid rounded" src="{% static 'images/blank.png' %}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{x.user.get_full_name}}</h5>
+                                <div class="row">
+                                    <div class="col"><b>Age: </b></div>
+                                    <div class="col">{{ x.age }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Religion: </b></div>
+                                    <div class="col">{{ x.religion }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Marital status: </b></div>
+                                    <div class="col">{{ x.marital_status_get }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Country: </b></div>
+                                    <div class="col">{{ x.country }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Education: </b></div>
+                                    <div class="col">{{ x.education_get }}<br> ({{ x.specialization }})</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><b>Mother tongue: </b></div>
+                                    <div class="col">{{ x.mother_tongue }}</div>
+                                </div>
+                                <div class="row">
+                                    <a href="/my-profile/i-req/?interested_id={{ x.pk }}" class ="btn bg-main">Interested</a>
+                                </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                 </div>
+                 <hr>
+                    <ul class="pagination justify-content-center pagination-md">
+                    {% for i in last_page %}
+                    <li class="page-item">
+                    <button class="btn {% if i == page_index %} bg-main text-white {% endif %}" type="submit" name="page_index" value="{{ i }}" {% if i == page_index %} disabled {% endif %}>{{ i|add:"1" }} </button>
+                    </li>
+                    {% endfor %}
+                    </ul>
+                 {% else %}
+                     {% if p is not None  %}
+                     <h2>Sorry, no profile found with this search query</h2>
+                     {% endif %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block footer %}
+<script>
+    window.onload = function() {
+        populateCountries('country', 'state', '{{a.country}}');
+        populateStates('country', 'state', '{{a.state}}');
+    }
+</script>
+{% load static %}
+
+<script src="{% static 'js/countries.js' %}"></script>
+{% endblock %}

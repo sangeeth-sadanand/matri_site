@@ -1,0 +1,99 @@
+{% extends "master.djhtml" %}
+
+{% block title %} 
+    Soulmate Edit profile
+{% endblock %}
+
+{% block navbar_left %}
+
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="container padding-tb">
+        <div class="row justify-content-between">
+             <form class="col" method = "POST" enctype="multipart/form-data">
+                 {% csrf_token %}
+                <div class="row">
+                <!--================================ Title row ========================-->
+                    <div class="col padding-tb">
+                        Add profile picture
+                    </div>
+                </div>
+                <div class="row">
+                <!--================================ Photo upload ====================-->
+                <div class="col-md-5 img">
+                      {% load static %}
+                      <img id="img_disp" class="img-fluid" src="{% static 'images/blank.png' %}"
+                           style="padding: 10px" alt="your image" />
+                  </div>
+                  <div class="col-md-5">
+                      <ul>
+                          <li>Portrait images are recommended</li>
+                          <li>Maximum file size is 7MB</li>
+                          <li>Image file of .jpg or .png is only accepted</li>
+                      </ul>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Upload</span>
+                      </div>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="photo"
+                               id="photo_browse" onchange="show_image_validate(this,'img_disp')" required>
+                        <label class="custom-file-label"
+                               for="photo_browse">Browse: </label>
+                      </div>
+                    </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="taken_on">Taken on:
+                                </label>
+                            </div>
+                            <input class="form-control" type = "date" id = "taken_on" name =
+                                    "taken_on" required/>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text"
+                                       for="modified">Modified:
+                                </label>
+                            </div>
+                            <select class="custom-select" name = "modified"
+                                    id="modified" required>
+                                {% for x, y in p.MODIFICATION_CHOICES.items %}
+                                    <option value="{{x}}" >{{y}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                  </div>
+
+                </div>
+                <!--=================== submit ========================-->
+                <div class="form-group row">
+                        <label class = "col-sm-4"></label>
+                        <input type="submit" id = "submit" class="btn btn-success col-sm-2" value = "Submit">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+<script> 
+function set_age(){
+    var age = document.getElementById('age');
+    age.readonly = false;
+    age.value = get_age(document.getElementById('dob').value);
+    age.readonly =true;
+}
+window.onload = function(){populateCountries('country', 'state','{{a.country}}');
+populateStates('country', 'state','{{a.state}}' )
+}
+</script>
+{% load static %}
+<script src="{% static 'js/countries.js' %}"></script>
+{% endblock %}
